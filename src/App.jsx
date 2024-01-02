@@ -3,11 +3,14 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import Quiz from './Quiz'
 import Landing from './Landing'
+import Scorecard from './Scorecard'
 
 const App = () => {
 	const [quiz, setQuiz] = useState([])
 	const [ready, setReady] = useState(false)
 	const [loading, setLoading] = useState(true)
+	const [score, setScore] = useState(0)
+	const [finished, setFinished] = useState(false)
 
 	useEffect(() => {
 		const getQuiz = async () => {
@@ -36,7 +39,15 @@ const App = () => {
 				}
 			>
 				{ready ? (
-					<Quiz quiz={quiz} />
+					finished ? (
+						<Scorecard score={score} />
+					) : (
+						<Quiz
+							quiz={quiz}
+							setScore={setScore}
+							setFinished={setFinished}
+						/>
+					)
 				) : (
 					<Landing setReady={setReady} loading={loading} />
 				)}
