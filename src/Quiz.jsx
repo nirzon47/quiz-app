@@ -52,18 +52,18 @@ const Quiz = ({ quiz, setScore, setFinished }) => {
 	}, [currentQuestion, quiz])
 
 	return (
-		<div className='grid place-content-center h-screen'>
-			<div className='w-96 flex flex-col gap-2'>
+		<div className='grid h-screen place-content-center'>
+			<div className='flex flex-col w-48 gap-2 md:w-96'>
 				<div className='flex justify-between'>
-					<h3 className='text-2xl font-bold'>
+					<h3 className='font-bold md:text-2xl'>
 						Question {currentQuestion + 1}
 					</h3>
-					<span className='text-primary text-2xl font-semibold '>
+					<span className='font-semibold md:text-2xl text-primary '>
 						Timer: {timer}
 					</span>
 				</div>
 				<h4
-					className='font-medium mb-2 h-24'
+					className='mb-2 font-medium md:h-24'
 					dangerouslySetInnerHTML={{
 						__html: quiz[currentQuestion].question,
 					}}
@@ -80,7 +80,7 @@ const Quiz = ({ quiz, setScore, setFinished }) => {
 					</button>
 				))}
 				<button
-					className='btn btn-secondary btn-sm mt-2'
+					className='mt-2 btn btn-secondary btn-sm'
 					onClick={handleSkip}
 				>
 					Skip
