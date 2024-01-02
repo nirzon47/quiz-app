@@ -50,11 +50,14 @@ const App = () => {
 							{finished ? (
 								<Scorecard score={score} />
 							) : (
-								<Quiz
-									quiz={quiz}
-									setScore={setScore}
-									setFinished={setFinished}
-								/>
+								<div className='grid place-content-center h-screen'>
+									<Quiz
+										quiz={quiz}
+										setScore={setScore}
+										setFinished={setFinished}
+										answers
+									/>
+								</div>
 							)}
 						</CSSTransition>
 					</TransitionGroup>
