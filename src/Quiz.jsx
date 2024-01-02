@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const Quiz = ({ quiz, setScore, setFinished }) => {
 	const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -9,6 +10,15 @@ const Quiz = ({ quiz, setScore, setFinished }) => {
 			setScore((prev) => prev + 1)
 		}
 
+		if (currentQuestion + 1 === quiz.length) {
+			setFinished(true)
+			return
+		}
+
+		setCurrentQuestion(currentQuestion + 1)
+	}
+
+	const handleSkip = () => {
 		if (currentQuestion + 1 === quiz.length) {
 			setFinished(true)
 			return
@@ -31,9 +41,12 @@ const Quiz = ({ quiz, setScore, setFinished }) => {
 				<h3 className='text-2xl font-bold'>
 					Question {currentQuestion + 1}
 				</h3>
-				<h4 className='font-medium mb-2 h-24'>
-					{quiz[currentQuestion].question.replace(/&quot;/g, '"')}
-				</h4>
+				<h4
+					className='font-medium mb-2 h-24'
+					dangerouslySetInnerHTML={{
+						__html: quiz[currentQuestion].question,
+					}}
+				></h4>
 				{getAnswers().map((answer) => (
 					<button
 						className='btn-sm btn btn-accent'
@@ -46,7 +59,7 @@ const Quiz = ({ quiz, setScore, setFinished }) => {
 				))}
 				<button
 					className='btn btn-secondary btn-sm mt-2'
-					onClick={() => setCurrentQuestion(currentQuestion + 1)}
+					onClick={handleSkip}
 				>
 					Skip
 				</button>

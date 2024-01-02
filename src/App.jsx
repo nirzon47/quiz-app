@@ -39,15 +39,25 @@ const App = () => {
 				}
 			>
 				{ready ? (
-					finished ? (
-						<Scorecard score={score} />
-					) : (
-						<Quiz
-							quiz={quiz}
-							setScore={setScore}
-							setFinished={setFinished}
-						/>
-					)
+					<TransitionGroup>
+						<CSSTransition
+							key={finished}
+							timeout={300}
+							classNames={
+								'animate-jump-in animate-once animate-duration-300 animate-delay-0 animate-ease-in-out'
+							}
+						>
+							{finished ? (
+								<Scorecard score={score} />
+							) : (
+								<Quiz
+									quiz={quiz}
+									setScore={setScore}
+									setFinished={setFinished}
+								/>
+							)}
+						</CSSTransition>
+					</TransitionGroup>
 				) : (
 					<Landing setReady={setReady} loading={loading} />
 				)}
