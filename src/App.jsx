@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import axios from 'axios'
 
 import Quiz from './Quiz'
 import Landing from './Landing'
@@ -15,10 +16,10 @@ const App = () => {
 	useEffect(() => {
 		const getQuiz = async () => {
 			try {
-				const response = await fetch(
+				const response = await axios.get(
 					'https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple'
 				)
-				const data = await response.json()
+				const data = response.data
 				setQuiz(data.results)
 				setLoading(false)
 			} catch (error) {
